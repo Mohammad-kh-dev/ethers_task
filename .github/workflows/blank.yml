@@ -14,10 +14,10 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 20
+          node-version: 20  # Updated to use Node.js 20
 
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
@@ -26,16 +26,16 @@ jobs:
         run: npm run build
 
       - name: Upload production-ready build files
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3  # Updated version number
         with:
           name: production-files
           path: ./dist
 
   deploy:
     name: Deploy
-    needs: build
+    needs: build  # This job depends on the successful completion of "build" job
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main'  # Deploy only on push to main branch
 
     steps:
       - name: Download artifact

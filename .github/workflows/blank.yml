@@ -35,7 +35,7 @@ jobs:
     name: Deploy
     needs: build  # This job depends on the successful completion of "build" job
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'  # Deploy only on push to main branch
+    if: github.ref == 'refs/heads/master'  # Deploy only on push to main branch
 
     steps:
       - name: Download artifact
